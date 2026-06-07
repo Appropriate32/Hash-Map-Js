@@ -7,6 +7,7 @@ class HashMap {
     this.loadFactor = 0.75;
     this.capacity = 16;
     this.buckets = new Array(this.capacity).fill(null);
+    this.size = 0;
   }
 
   hash(key) {
@@ -35,6 +36,7 @@ class HashMap {
 
     if (returnedNode === null) {
       this.buckets[index].append(key, value);
+      this.size++;
     } else {
       returnedNode.value = value;
     }
@@ -88,9 +90,36 @@ class HashMap {
     const deleteIndex = this.buckets[index].findIndex(key);
     if (deleteIndex !== -1) {
       this.buckets[index].removeAt(deleteIndex);
+      this.size--;
       return true;
     } else {
       return false;
     }
+  }
+
+  length() {
+    return this.size;
+  }
+
+  clear() {
+    this.buckets.fill(null);
+    this.size = 0;
+  }
+
+  keys() {
+    const allKeys = [];
+
+    for (const bucket of this.buckets) {
+      if (bucket !== null) {
+        let currentNode = bucket.headNode;
+
+        while (currentNode) {
+          allKeys.push(currentNode.key);
+          currentNode = currentNode.nextNode;
+        }
+      }
+    }
+
+    return allKeys;
   }
 }
