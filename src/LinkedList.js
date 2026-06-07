@@ -110,12 +110,12 @@ class LinkedList {
     return null;
   }
 
-  findIndex(value) {
+  findIndex(key) {
     let currentNode = this.headNode;
     let counter = 0;
 
     while (currentNode) {
-      if (currentNode.value === value) return counter;
+      if (currentNode.key === key) return counter;
       counter++;
       currentNode = currentNode.nextNode;
     }

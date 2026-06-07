@@ -75,4 +75,22 @@ class HashMap {
       return true;
     }
   }
+
+  remove(key) {
+    const index = this.hash(key);
+
+    if (index < 0 || index >= this.buckets.length) {
+      throw new Error("Trying to access index out of bounds");
+    }
+
+    if (this.buckets[index] === null) return false;
+
+    const deleteIndex = this.buckets[index].findIndex(key);
+    if (deleteIndex !== -1) {
+      this.buckets[index].removeAt(deleteIndex);
+      return true;
+    } else {
+      return false;
+    }
+  }
 }
