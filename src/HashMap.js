@@ -119,7 +119,41 @@ class HashMap {
         }
       }
     }
-
     return allKeys;
+  }
+
+  values() {
+    const allValues = [];
+
+    for (const bucket of this.buckets) {
+      if (bucket !== null) {
+        let currentNode = bucket.headNode;
+
+        while (currentNode) {
+          allValues.push(currentNode.value);
+          currentNode = currentNode.nextNode;
+        }
+      }
+    }
+
+    return allValues;
+  }
+
+  entries() {
+    const allPairs = [];
+
+    for (const bucket of this.buckets) {
+      if (bucket !== null) {
+        let currentNode = bucket.headNode;
+
+        while (currentNode) {
+          const keyValue = [currentNode.key, currentNode.value];
+          allPairs.push(keyValue);
+          currentNode = currentNode.nextNode;
+        }
+      }
+    }
+
+    return allPairs;
   }
 }
