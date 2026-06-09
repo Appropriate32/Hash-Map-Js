@@ -37,8 +37,29 @@ class HashMap {
     if (returnedNode === null) {
       this.buckets[index].append(key, value);
       this.size++;
+      if (this.size > this.capacity * this.loadFactor) {
+        this.resize();
+      }
     } else {
       returnedNode.value = value;
+    }
+  }
+
+  resize() {
+    const oldBuckets = this.buckets;
+    this.capacity *= 2;
+    this.buckets = new Array(this.capacity).fill(null);
+    this.size = 0;
+
+    for (const bucket of oldBuckets) {
+      if (bucket !== null) {
+        let currentNode = bucket.headNode;
+
+        while (currentNode) {
+          this.set(currentNode.key, currentNode.value);
+          currentNode = currentNode.nextNode;
+        }
+      }
     }
   }
 
