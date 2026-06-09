@@ -1,6 +1,4 @@
-import "./styles.css";
 import LinkedList from "./LinkedList.js";
-import Node from "./Node.js";
 
 class HashMap {
   constructor() {
@@ -178,3 +176,5 @@ class HashMap {
     return allPairs;
   }
 }
+
+export default HashMap;
